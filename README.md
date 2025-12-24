@@ -17,3 +17,32 @@ These configs include routing protocols, MPLS, MPLS VPN, security controls, and 
 - Word/Doc notes explaining layout, addressing, and design decisions.
 
 ![Netowrk Topology](Topology.png)
+
+### 3) System & Server Files
+Supporting materials used in this project
+
+## Purpose
+
+The goal of this project is to demonstrate real-world carrier-grade ISP routing with MPLS:
+- Scalable routing protocols (OSPF, EIGRP, MP-BGP)
+- Label Switching Technique (MPLS)
+- IP addressing
+
+## How to Use This Repository 
+
+**If you’re studying or reviewing this project:**
+1. Open the **Network Topology** diagram to understand Infrastructure layout.
+2. Load the appropriate configurations into your simulator of choice.
+3. Use the CLI configs to step through:
+   - Routing
+   - Security
+   - Connectivity checks
+4. Compare your own setup against the configs in the Repository.
+
+## Recommended Tools
+
+- **EVE-NG** for topology/simulation
+- Cisco CLI (IOL)  
+- Ping, traceroute, and **show/debug** commands for verification
+
+**All work in this Repository was completed by Hasan Bahzad (ID 202001980) Networking Student At Bahrain Polytechnic
