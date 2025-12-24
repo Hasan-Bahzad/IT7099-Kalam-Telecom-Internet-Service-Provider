@@ -12,14 +12,16 @@ Full CLI configurations, backups, and device-specific files across Kalam Telecom
 - Batelco Site
 These configs include routing protocols, MPLS, MPLS VPN, security controls, and verification states.
 
-### 2) Design & Documentation Files
+### 2) System & Server Files
+Supporting materials or software used in this project
+
+### 3) Design & Documentation Files
 - **Network Topology**— Visual map of Kalam Telecom Infrastructure. 
 - Word/Doc notes explaining layout, addressing, and design decisions.
 
 ![Netowrk Topology](Topology.png)
 
-### 3) System & Server Files
-Supporting materials used in this project
+
 
 ## Purpose
 
