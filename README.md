@@ -16,4 +16,4 @@ These configs include routing protocols, MPLS, MPLS VPN, security controls, and 
 - **Network Topology**— Visual map of Kalam Telecom Infrastructure. 
 - Word/Doc notes explaining layout, addressing, and design decisions.
 
-![Netowrk Topology]
+![Netowrk Topology](Topology.png)
