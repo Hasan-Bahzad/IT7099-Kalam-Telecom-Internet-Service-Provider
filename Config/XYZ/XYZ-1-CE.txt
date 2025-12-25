@@ -1,0 +1,55 @@
+## Basic Config
+hostname XYZ-1-CE
+
+interface Loopback0
+ ip address 110.110.110.110 255.255.255.255
+
+interface Ethernet0/0
+ no ip address
+
+interface Ethernet0/0.10
+ encapsulation dot1Q 10
+ ip address 172.23.10.1 255.255.255.0
+
+interface Ethernet0/0.20
+ encapsulation dot1Q 20
+ ip address 172.23.20.1 255.255.255.0
+
+interface Ethernet0/0.30
+ encapsulation dot1Q 30
+ ip address 172.23.30.1 255.255.255.0
+ 
+interface Serial1/0
+ description Link to Kalam-PE1
+ ip address 74.211.4.6 255.255.255.252
+
+interface Serial1/1
+ description Link to Kalam-PE2
+ ip address 74.211.4.14 255.255.255.252
+====================================================
+## EIGRP Config
+router eigrp 20
+ network 74.211.4.4 0.0.0.3
+ network 74.211.4.12 0.0.0.3
+ network 110.110.110.110 0.0.0.0
+ network 172.23.10.0 0.0.0.255
+ network 172.23.20.0 0.0.0.255
+ network 172.23.30.0 0.0.0.255
+ eigrp router-id 110.110.110.110
+
+key chain XYZ_AuthenKey
+ key 1
+  key-string XYZ-Kalam20
+
+interface Serial1/0
+ ip authentication mode eigrp 20 md5
+ ip authentication key-chain eigrp 20 XYZ_AuthenKey
+ ip hello-interval eigrp 100 10
+ ip hold-time eigrp 100 30
+
+interface Serial1/1
+ ip authentication mode eigrp 20 md5
+ ip authentication key-chain eigrp 20 XYZ_AuthenKey
+ ip hello-interval eigrp 100 10
+ ip hold-time eigrp 100 30
+====================================================

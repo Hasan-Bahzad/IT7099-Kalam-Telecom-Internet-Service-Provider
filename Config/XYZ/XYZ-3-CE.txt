@@ -1,0 +1,46 @@
+## Basic Config
+hostname XYZ-3-CE
+
+interface Loopback0
+ ip address 130.130.130.130 255.255.255.255
+
+interface Ethernet0/0
+ no ip address
+
+interface Ethernet0/0.10
+ encapsulation dot1Q 10
+ ip address 172.25.10.1 255.255.255.0
+
+interface Ethernet0/0.20
+ encapsulation dot1Q 20
+ ip address 172.25.20.1 255.255.255.0
+
+interface Ethernet0/0.30
+ encapsulation dot1Q 30
+ ip address 172.25.30.1 255.255.255.0
+
+interface Serial1/0
+ description Link to Batelco-PE4
+ ip address 54.40.61.18 255.255.255.252
+
+interface Serial1/1
+ no ip address
+ shutdown
+
+interface Serial1/2
+ no ip address
+ shutdown
+
+interface Serial1/3
+ no ip address
+ shutdown
+====================================================
+## EIGRP Config
+router eigrp 20
+ network 54.40.61.16 0.0.0.3
+ network 130.130.130.130 0.0.0.0
+ network 172.25.10.0 0.0.0.255
+ network 172.25.20.0 0.0.0.255
+ network 172.25.30.0 0.0.0.255
+ eigrp router-id 130.130.130.130
+====================================================

@@ -1,0 +1,55 @@
+## Basic Config
+hostname ABC-1-CE
+
+interface Loopback0
+ ip address 10.10.10.10 255.255.255.255
+
+interface Ethernet0/0
+ no ip address
+
+interface Ethernet0/0.10
+ encapsulation dot1Q 10
+ ip address 172.20.10.1 255.255.255.0
+
+interface Ethernet0/0.20
+ encapsulation dot1Q 20
+ ip address 172.20.20.1 255.255.255.0
+
+interface Ethernet0/0.30
+ encapsulation dot1Q 30
+ ip address 172.20.30.1 255.255.255.0
+ 
+interface Serial1/0
+ description Link to Kalam-PE3
+ ip address 74.211.4.18 255.255.255.252
+ 
+interface Serial1/1
+ description Link to Kalam-PE1
+ ip address 74.211.4.2 255.255.255.252
+====================================================
+## EIGRP Config
+router eigrp 10
+ network 10.10.10.10 0.0.0.0
+ network 74.211.4.0 0.0.0.3
+ network 74.211.4.16 0.0.0.3
+ network 172.20.10.0 0.0.0.255
+ network 172.20.20.0 0.0.0.255
+ network 172.20.30.0 0.0.0.255
+ eigrp router-id 10.10.10.10
+ 
+key chain ABC_AuthenKey
+ key 1
+  key-string ABC-Kalam10
+
+interface Serial1/0
+ ip authentication mode eigrp 10 md5
+ ip authentication key-chain eigrp 10 ABC_AuthenKey
+ ip hello-interval eigrp 100 10
+ ip hold-time eigrp 100 30
+ 
+interface Serial1/1
+ ip authentication mode eigrp 10 md5
+ ip authentication key-chain eigrp 10 ABC_AuthenKey
+ ip hello-interval eigrp 100 10
+ ip hold-time eigrp 100 30
+====================================================
