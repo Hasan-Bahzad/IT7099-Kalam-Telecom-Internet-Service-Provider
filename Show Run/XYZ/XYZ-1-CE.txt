@@ -1,0 +1,173 @@
+!
+! Last configuration change at 00:30:17 UTC Thu Dec 25 2025
+!
+version 15.5
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname XYZ-1-CE
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+bsd-client server url https://cloudsso.cisco.com/as/token.oauth2
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+key chain XYZ_AuthenKey
+ key 1
+  key-string XYZ-Kalam20
+!
+!
+!
+!
+!
+cts logging verbose
+!
+!
+!
+redundancy
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 110.110.110.110 255.255.255.255
+!
+interface Ethernet0/0
+ no ip address
+!
+interface Ethernet0/0.10
+ encapsulation dot1Q 10
+ ip address 172.23.10.1 255.255.255.0
+!
+interface Ethernet0/0.20
+ encapsulation dot1Q 20
+ ip address 172.23.20.1 255.255.255.0
+!
+interface Ethernet0/0.30
+ encapsulation dot1Q 30
+ ip address 172.23.30.1 255.255.255.0
+!
+interface Ethernet0/1
+ no ip address
+ shutdown
+!
+interface Ethernet0/2
+ no ip address
+ shutdown
+!
+interface Ethernet0/3
+ no ip address
+ shutdown
+!
+interface Serial1/0
+ description Link to Kalam-PE1
+ ip address 74.211.4.6 255.255.255.252
+ ip authentication mode eigrp 20 md5
+ ip authentication key-chain eigrp 20 XYZ_AuthenKey
+ ip hello-interval eigrp 100 10
+ ip hold-time eigrp 100 30
+ serial restart-delay 0
+!
+interface Serial1/1
+ description Link to Kalam-PE2
+ ip address 74.211.4.14 255.255.255.252
+ ip authentication mode eigrp 20 md5
+ ip authentication key-chain eigrp 20 XYZ_AuthenKey
+ ip hello-interval eigrp 100 10
+ ip hold-time eigrp 100 30
+ serial restart-delay 0
+!
+interface Serial1/2
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial1/3
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+!
+router eigrp 20
+ network 74.211.4.4 0.0.0.3
+ network 74.211.4.12 0.0.0.3
+ network 110.110.110.110 0.0.0.0
+ network 172.23.10.0 0.0.0.255
+ network 172.23.20.0 0.0.0.255
+ network 172.23.30.0 0.0.0.255
+ eigrp router-id 110.110.110.110
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login
+ transport input none
+!
+!
+end

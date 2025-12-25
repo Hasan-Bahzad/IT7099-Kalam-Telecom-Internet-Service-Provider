@@ -1,0 +1,246 @@
+!
+! Last configuration change at 02:08:42 KSA Thu Dec 25 2025 by LocalAdmin
+!
+version 15.5
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname Kalam-R2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+aaa new-model
+!
+!
+aaa authentication login default group radius local
+!
+!
+!
+!
+!
+aaa session-id common
+!
+!
+!
+bsd-client server url https://cloudsso.cisco.com/as/token.oauth2
+clock timezone KSA 3 0
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+ip domain name KalamTelecom
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+cts logging verbose
+!
+!
+username LocalAdmin privilege 15 secret 9 $9$GACuja2hNaIQTn$c2yaHaPrKfN8A9ELUWVu0OqSdr/pmIAlztmolK/En0c
+!
+redundancy
+!
+!
+ip ssh time-out 90
+ip ssh version 2
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 1.1.3.2 255.255.255.255
+!
+interface Ethernet0/0
+ description Link to Kalam-PE6
+ ip address 172.17.255.9 255.255.255.252
+!
+interface Ethernet0/1
+ description Link to Kalam-PE5
+ ip address 172.17.255.13 255.255.255.252
+!
+interface Ethernet0/2
+ no ip address
+!
+interface Ethernet0/2.10
+ description Link to IT Department
+ encapsulation dot1Q 10
+ ip address 172.17.10.2 255.255.255.0
+ ip access-group IT-ACL in
+ standby version 2
+ standby 10 ip 172.17.10.100
+ standby 10 preempt
+!
+interface Ethernet0/2.20
+ description Link to Finance Department
+ encapsulation dot1Q 20
+ ip address 172.17.20.2 255.255.255.0
+ ip access-group Fin-ACL in
+ standby version 2
+ standby 20 ip 172.17.20.100
+ standby 20 preempt
+!
+interface Ethernet0/2.99
+ description Link to SWManagement VLAN
+ encapsulation dot1Q 99 native
+ ip address 172.17.99.2 255.255.255.0
+ ip access-group SWM-ACL in
+ standby version 2
+ standby 99 ip 172.17.99.100
+ standby 99 priority 150
+ standby 99 preempt
+!
+interface Ethernet0/2.100
+ description Link to Infrastructure Devices VLAN
+ encapsulation dot1Q 100
+ ip address 172.17.100.2 255.255.255.0
+ ip access-group Infra-ACL in
+ standby version 2
+ standby 100 ip 172.17.100.100
+ standby 100 priority 150
+ standby 100 preempt
+!
+interface Ethernet0/3
+ description Link to Kalam-R1
+ ip address 172.17.255.17 255.255.255.252
+!
+router ospf 5
+ router-id 1.1.3.2
+ network 172.17.10.0 0.0.0.255 area 0
+ network 172.17.20.0 0.0.0.255 area 0
+ network 172.17.99.0 0.0.0.255 area 0
+ network 172.17.100.0 0.0.0.255 area 0
+ network 172.17.255.8 0.0.0.3 area 0
+ network 172.17.255.12 0.0.0.3 area 0
+ network 172.17.255.16 0.0.0.3 area 0
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+!
+ip access-list standard SSH-ACL
+ permit 172.17.10.0 0.0.0.255
+!
+ip access-list extended Fin-ACL
+ permit icmp 172.17.20.0 0.0.0.255 172.17.10.0 0.0.0.255 echo-reply
+ deny   ip 172.17.20.0 0.0.0.255 192.168.1.0 0.0.0.255
+ deny   ip 172.17.20.0 0.0.0.255 172.17.10.0 0.0.0.255
+ deny   ip 172.17.20.0 0.0.0.255 172.17.99.0 0.0.0.255
+ deny   ip 172.17.20.0 0.0.0.255 172.17.100.0 0.0.0.255
+ permit ip 172.17.20.0 0.0.0.255 any
+ip access-list extended IT-ACL
+ permit ip 172.17.10.0 0.0.0.255 192.168.1.0 0.0.0.255
+ permit ip 172.17.10.0 0.0.0.255 172.17.100.0 0.0.0.255
+ permit icmp 172.17.10.0 0.0.0.255 172.17.20.0 0.0.0.255 echo
+ permit icmp 172.17.10.0 0.0.0.255 172.17.99.0 0.0.0.255 echo
+ deny   ip 172.17.10.0 0.0.0.255 172.17.20.0 0.0.0.255
+ deny   ip 172.17.10.0 0.0.0.255 172.17.99.0 0.0.0.255
+ permit ip 172.17.10.0 0.0.0.255 any
+ip access-list extended Infra-ACL
+ permit ip 172.17.100.0 0.0.0.255 172.17.10.0 0.0.0.255
+ permit udp host 172.17.100.10 eq 1812 any
+ permit udp host 172.17.100.10 eq 1813 any
+ permit udp host 172.17.100.10 eq syslog any
+ deny   ip 172.17.100.0 0.0.0.255 172.17.20.0 0.0.0.255
+ deny   ip 172.17.100.0 0.0.0.255 172.17.99.0 0.0.0.255
+ permit ip 172.17.100.0 0.0.0.255 172.17.100.0 0.0.0.255
+ip access-list extended SWM-ACL
+ permit ip 172.17.99.0 0.0.0.255 172.17.10.0 0.0.0.255
+ permit ip 172.17.99.0 0.0.0.255 172.17.99.0 0.0.0.255
+ deny   ip any 172.17.99.0 0.0.0.255
+!
+logging host 172.17.100.10
+!
+!
+!
+!
+radius server KalamAAA
+ address ipv4 172.17.100.10 auth-port 1812 acct-port 1813
+ key WinRadius
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+banner motd C
+************************************************************************
+*                                                                      *
+*      SECURITY WARNING: INTERNET SERVICE PROVIDER (ISP) DEVICE        *
+*                                                                      *
+*  NOTICE: This network device Router is the property of Kalam         *
+*  Telecom ISP and is restricted to authorized personnel only.         *
+*  Unauthorized access is strictly prohibited and may result in        *
+*  disciplinary action and/or legal prosecution.                       *
+*                                                                      *
+*  This device plays a critical role in network infrastructure and     *
+*  security. Any unauthorized modifications, monitoring, or misuse     *
+*  of this system is strictly forbidden.                               *
+*                                                                      *
+*  All activity is logged and monitored in real-time. Any suspicious   *
+*  activity will be reported to network security teams.                *
+*                                                                      *
+*  If you are not authorized, disconnect immediately.                  *
+*                                                                      *
+************************************************************************
+
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ access-class SSH-ACL in
+ transport input ssh
+!
+ntp authentication-key 1 md5 080A4D4208142B2322 7
+ntp authenticate
+ntp trusted-key 1
+ntp server 11.11.11.1 key 1 prefer
+ntp server 1.1.3.1 key 1
+ntp server 11.11.11.4 key 1
+!
+end
