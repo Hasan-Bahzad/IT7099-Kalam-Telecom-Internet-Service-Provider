@@ -6,11 +6,13 @@ This repository contains all the files created throughout the **Kalam Telecom In
 ## What is included in this repository 
 
 ### 1) Network Configurations
-Full CLI configurations, backups, and device-specific files across Kalam Telecom Infrastructure
-- Customer Sites
-- Kalam Telecom Sites (MPLS Backbone and internal network)
-- Batelco Site
 These configs include routing protocols, MPLS, MPLS VPN, security controls, and verification states.
+- Full CLI configurations, and device-specific files across the topology:
+-    Customer Sites
+-    Kalam Telecom Sites (MPLS Backbone and internal network)
+-    Batelco Site
+
+### 2) 
 
 ### 2) Reports
 Includes all the reports produced throughout the project
