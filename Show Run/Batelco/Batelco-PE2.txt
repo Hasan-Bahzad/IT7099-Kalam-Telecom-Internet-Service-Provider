@@ -1,0 +1,185 @@
+
+!
+! Last configuration change at 22:53:40 UTC Wed Dec 24 2025
+!
+version 15.5
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname Batelco-PE2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+bsd-client server url https://cloudsso.cisco.com/as/token.oauth2
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+mpls ldp discovery hello interval 15
+mpls ldp discovery hello holdtime 45
+!
+!
+!
+!
+!
+!
+!
+cts logging verbose
+!
+!
+!
+redundancy
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ no shutdown
+ ip address 2.2.2.2 255.255.255.255
+!
+interface Ethernet0/0
+ no shutdown
+ description Link to Batelco-PE1
+ ip address 54.40.61.2 255.255.255.252
+ mpls ip
+!
+interface Ethernet0/1
+ no shutdown
+ description Link to Batelco-PE4
+ ip address 54.40.61.9 255.255.255.252
+ mpls ip
+!
+interface Ethernet0/2
+ no shutdown
+ no ip address
+ shutdown
+!
+interface Ethernet0/3
+ no shutdown
+ no ip address
+ shutdown
+!
+interface Serial1/0
+ no shutdown
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial1/1
+ no shutdown
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial1/2
+ no shutdown
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial1/3
+ no shutdown
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+router ospf 1
+ router-id 2.2.2.2
+ network 2.2.2.2 0.0.0.0 area 0
+ network 54.40.61.0 0.0.0.3 area 0
+ network 54.40.61.8 0.0.0.3 area 0
+!
+router bgp 200
+ bgp router-id 2.2.2.2
+ bgp log-neighbor-changes
+ no bgp default ipv4-unicast
+ neighbor 2.2.2.1 remote-as 200
+ neighbor 2.2.2.1 update-source Loopback0
+ neighbor 2.2.2.3 remote-as 200
+ neighbor 2.2.2.3 update-source Loopback0
+ neighbor 2.2.2.4 remote-as 200
+ neighbor 2.2.2.4 update-source Loopback0
+ neighbor 54.40.61.62 remote-as 8
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family vpnv4
+  neighbor 2.2.2.1 activate
+  neighbor 2.2.2.1 send-community both
+  neighbor 2.2.2.3 activate
+  neighbor 2.2.2.3 send-community both
+  neighbor 2.2.2.4 activate
+  neighbor 2.2.2.4 send-community both
+ exit-address-family
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+!
+!
+!
+mpls ldp router-id Loopback0 force
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login
+ transport input none
+!
+!
+end
