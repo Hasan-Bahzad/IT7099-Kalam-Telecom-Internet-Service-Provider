@@ -1,29 +1,42 @@
 # IT7099-Kalam-Telecom-Internet-Service-Provider
-This repository contains all the files created throughout the **Kalam Telecom Internet Service Provider** Project
+This repository contains the full design, configuration, and documentation of a simulated MPLS service provider network built in EVE-NG.
+
+The project includes customer sites, a service provider backbone (Kalam Telecom), and external connectivity to Batelco. It demonstrates MPLS, MPLS VPN, routing protocols, security controls.
 
 ---
 
 ## What is included in this repository 
 
 ### 1) Network Configurations
-These configs include routing protocols, MPLS, MPLS VPN, security controls, and verification states.
-- Full CLI configurations, and device-specific files across the topology:
--    Customer Sites
--    Kalam Telecom Sites (MPLS Backbone and internal network)
--    Batelco Site
+This section includes all device configuration used in the topology
+- Full CLI configurations
+- Device-specific configuration files
+- Routing protocol configuration
+- MPLS and MPLS L3VPN configuration
+- Security controls (Access Control List, Route-Maps)
+- Verification commands (show run, show ip route)
+- Devices included:
+   - Customer Sites
+   - Kalam Telecom Sites (MPLS Backbone and internal network)
+   - Batelco Site
 
-### 2) 
-
-### 2) Reports
-Includes all the reports produced throughout the project
+### 2) EVE-NG Topology File
+- Complete .unl lab file
+- Ready-to-import EVE-NG topology
 
 ### 3) Network Design Documentation
-- **Network Topology**— Visual map of Kalam Telecom Infrastructure. 
-- Network Documentation explaining layout, addressing, and design decisions.
+- **Network Topology**— Visual map of the project. 
+- IP Addressing Plan
+- Network Design Documentation
+
+### 4) Reports
+Includes all the academic reports and documentation produced throughout the project:
+- Thesis
+- Project Charter
+- Project Plan
+- Demonstration PPT
 
 ![Netowrk Topology](Topology.png)
-
-
 
 ## Purpose
 
@@ -37,11 +50,8 @@ The goal of this project is to demonstrate real-world carrier-grade ISP routing 
 
 **If you’re studying or reviewing this project:**
 1. Open the **Network Topology** diagram to understand Infrastructure layout.
-2. Load the appropriate configurations into your simulator of choice.
-3. Use the CLI configs to step through:
-   - Routing
-   - Security
-   - Connectivity checks
+2. Import the EVE-NG .unl file into your EVE-NG environment.
+3. Laod the provided device configuration.
 4. Compare your own setup against the configs in the Repository.
 
 ## Recommended Tools
@@ -50,4 +60,5 @@ The goal of this project is to demonstrate real-world carrier-grade ISP routing 
 - Cisco CLI (IOL)  
 - Ping, traceroute, and **show/debug** commands for verification
 
-**All work in this Repository was completed by Hasan Bahzad (ID 202001980) Networking Student At Bahrain Polytechnic
+## Author
+Hasan Bahzad (202001980) a networking student at Bahrain Polytechnic
