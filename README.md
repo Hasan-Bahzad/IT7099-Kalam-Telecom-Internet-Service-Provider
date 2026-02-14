@@ -1,5 +1,5 @@
 # IT7099-Kalam-Telecom-Internet-Service-Provider
-This repository contains all the files created throughout the **Kalam Telecom Internet Service Provider**
+This repository contains all the files created throughout the **Kalam Telecom Internet Service Provider** Project
 
 ---
 
@@ -12,10 +12,10 @@ Full CLI configurations, backups, and device-specific files across Kalam Telecom
 - Batelco Site
 These configs include routing protocols, MPLS, MPLS VPN, security controls, and verification states.
 
-### 2) System & Server Files
-Supporting materials or software used in this project
+### 2) Reports
+Includes all the reports produced throughout the project
 
-### 3) Design & Documentation Files
+### 3) Network Design Documentation
 - **Network Topology**— Visual map of Kalam Telecom Infrastructure. 
 - Word/Doc notes explaining layout, addressing, and design decisions.
 
@@ -28,6 +28,7 @@ Supporting materials or software used in this project
 The goal of this project is to demonstrate real-world carrier-grade ISP routing with MPLS:
 - Scalable routing protocols (OSPF, EIGRP, MP-BGP)
 - Label Switching Technique (MPLS)
+- Inter-AS MPLS VPN Network
 - IP addressing
 
 ## How to Use This Repository 
