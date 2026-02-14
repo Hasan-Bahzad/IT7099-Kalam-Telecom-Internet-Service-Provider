@@ -1,0 +1,55 @@
+## Basic Config
+hostname Kalam-SW2
+
+interface Ethernet0/0
+ no shutdown
+ switchport trunk allowed vlan 10,20,99,100
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+!
+interface Ethernet0/1
+ no shutdown
+ shutdown
+!
+interface Ethernet0/2
+ no shutdown
+ switchport trunk allowed vlan 10,20,99,100
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+!
+interface Ethernet0/3
+ no shutdown
+ switchport trunk allowed vlan 10,20,99,100
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+!
+interface Vlan99
+ no shutdown
+ ip address 172.17.99.12 255.255.255.0
+!
+ip default-gateway 172.17.99.100
+
+banner motd ^C
+************************************************************************
+*                                                                      *
+*      SECURITY WARNING: INTERNET SERVICE PROVIDER (ISP) DEVICE        *
+*                                                                      *
+*  NOTICE: This network device Switch is the property of Kalam         *
+*  Telecom ISP and is restricted to authorized personnel only.         *
+*  Unauthorized access is strictly prohibited and may result in        *
+*  disciplinary action and/or legal prosecution.                       *
+*                                                                      *
+*  This device plays a critical role in network infrastructure and     *
+*  security. Any unauthorized modifications, monitoring, or misuse     *
+*  of this system is strictly forbidden.                               *
+*                                                                      *
+*  All activity is logged and monitored in real-time. Any suspicious   *
+*  activity will be reported to network security teams.                *
+*                                                                      *
+*  If you are not authorized, disconnect immediately.                  *
+*                                                                      *
+************************************************************************
+^C

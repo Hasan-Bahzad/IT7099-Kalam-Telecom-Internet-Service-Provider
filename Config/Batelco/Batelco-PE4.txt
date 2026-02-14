@@ -1,0 +1,86 @@
+## Basic Config
+hostname Batelco-PE4
+
+interface Loopback0
+ ip address 2.2.2.4 255.255.255.255
+
+interface Ethernet0/0
+ description Link to Batelco-PE3
+ ip address 54.40.61.14 255.255.255.252
+
+interface Ethernet0/1
+ description Link to Batelco-PE2
+ ip address 54.40.61.10 255.255.255.252
+ 
+interface Serial1/0
+ description Link to XYZ-3-CE
+ ip address 54.40.61.17 255.255.255.252
+====================================================
+## VRF Config
+ip vrf XYZ-Com
+ rd 2.2.2.4:200
+ route-target export 65002:200
+ route-target import 65002:200
+ 
+interface Serial1/0
+ ip vrf forwarding XYZ-Com
+ ====================================================
+## MPLS Config
+interface Ethernet0/0
+ mpls ip
+ 
+interface Ethernet0/1
+ mpls ip
+
+mpls ldp discovery hello interval 15
+mpls ldp discovery hello holdtime 45
+
+mpls ldp router-id Loopback0 force
+====================================================
+## OSPF Config
+router ospf 1
+ router-id 2.2.2.4
+ network 2.2.2.4 0.0.0.3 area 0
+ network 54.40.61.8 0.0.0.3 area 0
+ network 54.40.61.12 0.0.0.3 area 0
+====================================================
+## EIGRP Config
+router eigrp MPLS
+ 
+ address-family ipv4 unicast vrf XYZ-Com autonomous-system 20
+  
+  topology base
+   redistribute bgp 200 metric 64 1000 255 1 1500
+  exit-af-topology
+  network 54.40.61.16 0.0.0.3
+  eigrp router-id 2.2.2.4
+ exit-address-family
+====================================================
+## BGP Config
+router bgp 200
+ bgp router-id 2.2.2.4
+ bgp log-neighbor-changes
+ no bgp default ipv4-unicast
+ neighbor 2.2.2.1 remote-as 200
+ neighbor 2.2.2.1 update-source Loopback0
+ neighbor 2.2.2.2 remote-as 200
+ neighbor 2.2.2.2 update-source Loopback0
+ neighbor 2.2.2.3 remote-as 200
+ neighbor 2.2.2.3 update-source Loopback0
+ 
+ address-family ipv4
+ exit-address-family
+ 
+ address-family vpnv4
+  neighbor 2.2.2.1 activate
+  neighbor 2.2.2.1 send-community both
+  neighbor 2.2.2.2 activate
+  neighbor 2.2.2.2 send-community both
+  neighbor 2.2.2.3 activate
+  neighbor 2.2.2.3 send-community both
+ exit-address-family
+ 
+ address-family ipv4 vrf XYZ-Com
+  redistribute eigrp 20
+ exit-address-family
+====================================================
