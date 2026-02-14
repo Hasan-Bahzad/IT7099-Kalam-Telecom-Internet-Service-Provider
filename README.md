@@ -17,7 +17,7 @@ Includes all the reports produced throughout the project
 
 ### 3) Network Design Documentation
 - **Network Topology**— Visual map of Kalam Telecom Infrastructure. 
-- Word/Doc notes explaining layout, addressing, and design decisions.
+- Network Documentation explaining layout, addressing, and design decisions.
 
 ![Netowrk Topology](Topology.png)
 
