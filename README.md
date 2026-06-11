@@ -1,4 +1,4 @@
-# IT7099-Kalam-Telecom-Internet-Service-Provider
+# Kalam-Telecom-Internet-Service-Provider
 This repository contains the full design, configuration, and documentation of a simulated MPLS service provider network built in EVE-NG.
 
 The project includes customer sites, a service provider backbone (Kalam Telecom), and external connectivity to Batelco. It demonstrates MPLS, MPLS VPN, routing protocols, security controls.
