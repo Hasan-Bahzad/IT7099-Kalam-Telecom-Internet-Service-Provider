@@ -1,4 +1,4 @@
-# 🌐 Kalam Telecom — ISP Network Simulation (MPLS L3VPN + Inter-AS)
+# 🌐 Kalam Telecom - ISP Network Simulation (MPLS L3VPN + Inter-AS)
 
 > A carrier-grade ISP network simulation built in EVE-NG, featuring MPLS L3VPN,
 > Inter-AS MPLS connectivity, and multi-customer VPN services.
