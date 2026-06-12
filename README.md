@@ -45,21 +45,23 @@ carrier-grade network engineering practices.
 │   ├── XYZ/
 │   ├── Kalam Telecom/
 │   └── Batelco/
+├── Documentation/
+│   ├── IP Addressing Table.pdf
+│   ├── Kalam Telecom Network Design Document.pdf
+│   └── Topology.png
+└── Reports/
+│   ├── Thesis.pdf
+│   ├── Project Charter.pdf
+│   ├── Project Plan.pdf
+│   └── Final Demo Presentation.pdf
 ├── Show Run
 │   ├── ABC/
 │   ├── XYZ/
 │   ├── Kalam Telecom/
 │   └── Batelco/
 ├── Kalam Telecom Internet Service Provider MPLS-Final.zip
-├── Documentation/
-│   ├── IP Addressing Table.pdf
-│   ├── Kalam Telecom Network Design Document.pdf
-│   └── Topology.png
-└── Reports/
-    ├── Thesis.pdf
-    ├── Project Charter.pdf
-    ├── Project Plan.pdf
-    └── Final Demo Presentation.pdf
+└── Kalam Telecom Upgrade Infrastructure Proposal.pdf
+
 ```
 
 ---
