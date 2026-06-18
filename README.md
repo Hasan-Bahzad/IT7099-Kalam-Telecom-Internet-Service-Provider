@@ -59,7 +59,6 @@ carrier-grade network engineering practices.
 │   ├── XYZ/
 │   ├── Kalam Telecom/
 │   └── Batelco/
-├── Kalam Telecom Internet Service Provider MPLS-Final.zip
 └── Kalam Telecom Upgrade Infrastructure Proposal.pdf
 
 ```
@@ -78,17 +77,13 @@ Full CLI configurations for every device in the topology:
 - Security policies (ACLs, Route-Maps)
 - Verification command outputs (`show ip route vrf`, `show mpls forwarding-table`, etc.)
 
-### 2. EVE-NG Topology File
-- Complete `.unl` lab file — ready to import directly into EVE-NG
-- All device roles and links pre-configured
-
-### 3. Network Design Documentation
+### 2. Network Design Documentation
 - Full IP addressing plan (loopbacks, links, customer subnets)
 - VRF and VPN topology breakdown
 - Inter-AS architecture diagram and peering design
 - Visual network topology map
 
-### 4. Academic Reports
+### 3. Academic Reports
 - **Thesis** — Full academic writeup of the project
 - **Project Charter** — Scope, objectives, and deliverables
 - **Project Plan** — Timeline and milestones
@@ -105,7 +100,7 @@ Full CLI configurations for every device in the topology:
 
 ### Option B — Lab Reproduction
 1. Install and launch **EVE-NG** (Community or Pro).
-2. Import `Kalam-Telecom.unl` into your EVE-NG lab folder.
+2. Create your own lab inside your EVE-NG.
 3. Assign the correct **Cisco IOL** images to router nodes.
 4. Boot devices and load configs from the `Configurations/` folder.
 5. Verify the network using the commands below.
@@ -159,6 +154,7 @@ This project demonstrates:
 ---
 
 ## 👤 Author
-**[Hasan Bahzad]**
-IT7099 Capstone Project
-[Bahrain Polytechnic / Networking]
+**Hasan Bahzad**
+IT7099 In house Project
+Bachelor of ICT — Networking
+Bahrain Polytechnic
